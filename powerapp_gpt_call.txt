@@ -1,0 +1,86 @@
+Set(
+    Response,
+    ChatGPTTest.Completion(
+        {
+            model: "gpt-3.5-turbo",
+            messages: [
+                {
+                    role: "system",
+                    content: TextInput1.Text & Char(13) & Last(
+                        Split(
+                            Concat(
+                                Gallery1.AllItems,
+                                Concatenate(
+                                    "split",
+                                    "|",
+                                    If(
+                                        day = Blank(),
+                                        Blank(),
+                                        "day|"
+                                    ),
+                                    If(
+                                        size = Blank(),
+                                        Blank(),
+                                        "size|"
+                                    ),
+                                    If(
+                                        time = Blank(),
+                                        Blank(),
+                                        "time|"
+                                    ),
+                                    If(
+                                        tip = Blank(),
+                                        Blank(),
+                                        "tip|"
+                                    ),
+                                    If(
+                                        total_bill = Blank(),
+                                        Blank(),
+                                        "total_bill|"
+                                    )
+                                )
+                            ),
+                            "split"
+                        )
+                    ).Value & Char(13) & Concat(
+                        Gallery1.AllItems,
+                        Concatenate(
+                            "|",
+                            If(
+                                day = Blank(),
+                                Blank(),
+                                day & "|"
+                            ),
+                            If(
+                                size = Blank(),
+                                Blank(),
+                                size & "|"
+                            ),
+                            If(
+                                time = Blank(),
+                                Blank(),
+                                time & "|"
+                            ),
+                            If(
+                                tip = Blank(),
+                                Blank(),
+                                Round(
+                                    tip,
+                                    2
+                                ) & "|"
+                            ),
+                            If(
+                                total_bill = Blank(),
+                                Blank(),
+                                Round(
+                                    total_bill,
+                                    2
+                                ) & "|"
+                            )
+                        ) & Char(13)
+                    )
+                }
+            ]
+        }
+    )
+)
